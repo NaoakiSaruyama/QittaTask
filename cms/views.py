@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
+from cms.models import Book
 # Create your views here.
 
 def book_list(request):
-  return HttpResponse('書籍の一覧')
+  books = Book.objects.all().order_by('id')
+  return render(request,'cms/book_list.html',{'books':books})
 
 
 def book_edit(request,book_id=None):
